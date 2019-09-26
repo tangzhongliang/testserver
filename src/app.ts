@@ -19,7 +19,7 @@ const MongoStore = mongo(session);
 dotenv.config({ path: ".env.example" });
 
 // API keys and Passport configuration
-import { getApi, login, getPhone, getSms } from "./controllers/api";
+import { getApi, login, getPhone, getSms, releasePhone } from "./controllers/api";
 
 // Create Express server
 const app = express();
@@ -28,7 +28,7 @@ const app = express();
 (<any>mongoose).Promise = bluebird;
 
 // Express configuration
-app.set("port", process.env.PORT || 3001);
+app.set("port", process.env.PORT || 3002);
 app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "pug");
 app.use(compression());
@@ -60,6 +60,7 @@ app.use(cors());
 app.get("/", getApi);
 app.get("/login", login);
 app.get("/getPhone", getPhone);
+app.get("/releasePhone", releasePhone);
 app.get("/getSms", getSms);
 /**
  * API examples routes.
